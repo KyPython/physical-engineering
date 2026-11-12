@@ -1,0 +1,12 @@
+[submodule "starter-kit"]
+	path = starter-kit
+	url = https://github.com/KyPython/ple-submission-opus55.git
+[submodule "agy-gemini"]
+	path = agy-gemini
+	url = https://github.com/KyPython/ple-submission-agy-gemini.git
+[submodule "apex-harness"]
+	path = apex-harness
+	url = https://github.com/KyPython/ple-submission-apex.git
+[submodule "ple-bench"]
+	path = ple-bench
+	url = https://github.com/google-research/ple.git

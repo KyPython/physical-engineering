@@ -1,0 +1,19 @@
+# Environment and secrets
+.env
+*.env
+*.key
+*.pem
+
+# Python & caches
+__pycache__/
+*.py[cod]
+.venv/
+.cache/
+
+# OS artifacts
+.DS_Store
+Thumbs.db
+
+# Harbor / Docker temporary run folders
+runs/
+.harbor/
