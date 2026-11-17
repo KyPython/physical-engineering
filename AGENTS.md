@@ -1,135 +1,79 @@
-# AGENTS.md — Universal Agent Instructions for Physical-Engineering's Last Exam (PLE)
+# Physical-Engineering's Last Exam — Agent Operating Doctrine
 
-This document provides complete instructions for any autonomous AI coding agent (Claude Code, Cursor, Codex, Pi, Aider, Antigravity, OpenHands, etc.) working in this repository.
+**Last updated:** 2026-11-16
+**Local root:** `/Users/ky/physical-engineering`
+**Canonical entry:** `/Users/ky/physical-engineering/agy-gemini` on `feat/frontier-stage1-readiness`
+**GitHub:** https://github.com/KyPython/ple-submission-agy-gemini
+**Notion:** https://app.notion.com/p/4168621e0a7a8103b151fa402ab028c9
+**Attempt log:** `docs/ATTEMPT_LOG.md`
 
----
+The same rules live in `agy-gemini/AGENTS.md` for a clone of that repo alone. Edit both files in the same change.
 
-## 1. Challenge & Repository Overview
+## Objective
 
-**Physical-Engineering's Last Exam (PLE)** is an agent benchmark challenge organized by Google Cloud AI Research and Mercor ([arXiv:2610.30537](https://arxiv.org/abs/2610.30537), [ple-bench.com](https://ple-bench.com)).
+The contest scores the mean task reward, from 0 to 1, of the engineering deliverable. A spec, unit test, bundle build, or harness commit is preparation. It becomes contest progress when `eval/run.py` or the official evaluator records a reward for this harness tree.
 
-The benchmark tests autonomous coding agents on complex, real-world engineering projects across four core physical disciplines:
-1. **Mechanical Engineering** (e.g., cooling systems, fluid dynamics, CFD convergence, thermal LCC)
-2. **Civil Engineering** (e.g., site earthwork, emergency spillways, compaction testing, foundation strategy)
-3. **Electrical Engineering** (e.g., MV conveyance, LV cable sizing, backfeed energization, solar interconnections)
-4. **Structural Engineering** (e.g., roof deck design, diaphragm shear, footing settlement, shoring verification)
+Final submission deadline: 5 January 2027. Hidden test ranking is a later stage. Dev-set reward on the public 29 tasks is the measurement available now.
 
-### Workspace Directory Structure
+## The entry
 
-```
-/Users/ky/physical-engineering/
-├── AGENTS.md                 # Universal instructions for AI coding agents (this file)
-├── CLAUDE.md                 # Symlink to AGENTS.md
-├── README.md                 # Human-readable workspace guide and quickstart
-├── .env.example              # Template for environment variables (API keys, proxies)
-├── ple-bench/                # Official Google Research benchmark evaluation engine
-│   ├── kit/                  # Build, check, export, protocol, and model tooling
-│   ├── eval/                 # Evaluation runner (run.py, dev_set.yaml, verifiers)
-│   ├── sample_submissions/   # Reference harnesses (agy-gemini, pi-opus, hermes-opus, minimal, etc.)
-│   └── docs/                 # Detailed documentation on protocols, tasks, and models
-├── starter-kit/              # Competition starter kit (Pi on Claude Opus 5.5 template)
-│   ├── submission.yaml       # Specification file declaring model and runtime commands
-│   ├── serve.py              # WebSocket server receiving task instructions
-│   ├── harness.py            # Agent execution logic
-│   └── artifacts/            # Verified dev-set evaluation artifacts across all 29 tasks
-└── scripts/                  # Helper automation scripts
-    ├── check_submission.sh   # Validates a submission directory against competition kit rules
-    └── run_eval.sh           # Runs local dev-set evaluation or artifact verification
-```
+Work in `agy-gemini`:
 
----
+- Model: `google-cloud/gemini-4-argon`
+- Effort: `AGY_EFFORT=high`
+- Agent: Antigravity CLI `agy` 1.4.10
+- Stage 1 branch: `feat/frontier-stage1-readiness`
+- Stage 1 code baseline: `4597775` (2026-11-14). On 2026-11-16 that branch was 9 commits ahead of `main`, and `main` was still `222df50`.
 
-## 2. Fundamental Operating Rules & Constraints
+`apex-harness` is frozen. `starter-kit` is the official sample and stays frozen. `ple-bench` is the upstream kit. `KyPython/ple-verified-harness` is the 2026-11-10 spec repository. Open no further harness directory, product branch, or GitHub repository for this contest.
 
-1. **Strict $0 Budget Policy:**
-   - Do NOT invoke paid commercial API endpoints (Vertex AI, OpenAI, Anthropic) without explicit user authorization.
-   - When submitted to the official competition portal, Google Cloud sponsors all evaluation model tokens for free (`google-cloud/gemini-3.8-flash`, `google-cloud/claude-opus-5-5`, etc.).
-   - Local validation must rely on offline builds (`kit build`), rule checking (`kit check`), and dry-run artifact verifications (`kit artifacts`).
+## Reference baseline
 
-2. **Container & Architecture Standards:**
-   - The competition evaluation server executes on `linux/amd64`.
-   - On macOS/Apple Silicon, always build Docker containers with `--platform linux/amd64`.
-   - Python dependencies must be managed via `uv` (pinned Python 3.12).
-   - Evaluation harness dependency: `harbor==0.20.0` with `websockets`.
+`starter-kit/artifacts/manifest.json` is the official sample run:
 
-3. **Protocol & Security Isolation:**
-   - The agent harness runs as a WebSocket server binding to `0.0.0.0:$PORT` inside a serve container.
-   - The serve container has network egress ONLY to its designated model API endpoint. It cannot access the public internet.
-   - The task container has NO network access.
-   - All interactions with the task environment (file I/O, bash execution, CAD tools, domain MCPs) must go through the competition protocol via `taskbridge.py`.
+- Created 2026-10-20
+- Harness `my-harness`, model `google-cloud/claude-opus-5-5`, commit `6ab05b9f5f25`
+- 29/29 tasks ended `ok`, mean reward **0.4912**
 
----
+That number is the sample's score. Report it as the reference. Our score starts at the first reward recorded for the agy-gemini tree.
 
-## 3. How a Submission Entry Works
+Sample tasks at 0, useful as hypotheses for what to measure: `foundation-strategy`, `solar-witness-test-package`, `data-hall-mep-routing`, `data-hall-mep-routing-offset`. Next-weakest on that same run: `solar-supplemental-review` 0.21, `pre-application-capacity-response` 0.23, `roof-deck-design` 0.29, `eor-review-corrections` 0.30. A missed hard constraint caps that item at 0.4.
 
-An entry is a GitHub commit containing:
-- `submission.yaml`: Configuration declaring entry name, model API, build command, and start command.
-- `serve.py`: WebSocket server receiving task requests and driving the agent.
-- `artifacts/`: Directory containing output deliverables from the 29 public dev tasks.
+Those rewards belong to the sample tree. Pairing its `artifacts/` with agy-gemini, or with an edited sample tree, breaks the artifact-to-harness match the rules require.
 
-### `submission.yaml` Specification
+## How to work
 
-```yaml
-name: my-engineering-agent
-model_api: google-cloud/gemini-3.8-flash # or google-cloud/claude-opus-5-5
-install: >-
-  uv venv --python 3.12 /opt/harness/venv
-  && uv pip install --python /opt/harness/venv/bin/python -r {src}/requirements.txt
-serve: /opt/harness/venv/bin/python {src}/serve.py
-env:
-  LOG_LEVEL: "info"
-```
+1. Read this file and the last entry in `docs/ATTEMPT_LOG.md`.
+2. Confirm the checkout is `agy-gemini` on `feat/frontier-stage1-readiness` or a descendant of `4597775`.
+3. When this harness has no dev manifest, the job is one dev-set evaluation. Official evaluation uses Google-sponsored `google-cloud/*` models. That includes the competition server and the local model proxy in `ple-bench/docs/models.md`. A commercial API outside that path waits for an explicit yes from Ky.
+4. When a manifest exists, choose one recorded failure, change the harness to address it, and re-export the affected tasks with `eval/run.py` from this same tree.
+5. In that same session, append `docs/ATTEMPT_LOG.md` with the mechanism, the hypothesis, the reward before and after, and keep / kill / revise. Update the Notion page linked above. Leave older log rows in place.
+6. Submit to Kaggle only after Ky explicitly says to submit. Record the commit SHA and the dev mean on the Notion page in that session.
 
-### Supported Google-Sponsored Models (Zero-Cost on Evaluation Server)
-- `google-cloud/gemini-3.8-flash`
-- `google-cloud/gemini-3.1-pro-preview`
-- `google-cloud/gemini-4-argon`
-- `google-cloud/claude-opus-5-5`
-- `google-cloud/claude-sonnet-4-5`
+Stage 1 through `4597775` is the code baseline. The next edit to `serve.py`, `task_mcp.py`, `taskbridge.py`, or `deliverable_gate.py` names the task, the reward, and the failure it addresses.
 
----
+## Fair play
 
-## 4. Key Verification Workflows
+The harness solves the task it is given and stays task-agnostic. Submission artifacts are the `eval/run.py` export for the committed harness and the `model_api` in `submission.yaml`. The serve container reaches the model endpoint. The task container stays offline.
 
-### A. Checking a Submission Directory
-Run from the workspace root:
+Reading graders from the harness, branching on task ids, and hand-editing `artifacts/` are disqualifying. Protocol and scoring live in `ple-bench/docs/protocol.md` and `ple-bench/docs/rules.md`.
+
+## Current evidence (2026-11-16)
+
+- No Kaggle submission.
+- No `artifacts/` for agy-gemini.
+- Stage 1 offline tests are recorded in `agy-gemini/specs/frontier-stage1-readiness/tasks.md` as 14 + 6 + 4 passing, plus `kit validate`. This file does not re-certify them.
+- Cached base images had no PDF rasterizer, and task images had not been pulled. Treat drawing reads as unproven on a real task container until a run shows otherwise.
+- The parent gitlink for `agy-gemini` may lag the feature branch. Point it at the commit you mean before describing the workspace as clean.
+- The 2026-11-10 spec hold (no smoke run, payloads uninspected) stopped on 2026-11-16. That dated writeup stays history. Public dev tasks may be inspected to explain a grader result.
+
+## Checks
+
+From `ple-bench`, against the canonical entry:
+
 ```bash
-./scripts/check_submission.sh starter-kit
-# or check a sample submission:
-./scripts/check_submission.sh ple-bench/sample_submissions/agy-gemini
+uv run python -m kit validate ../agy-gemini
+uv run python -m kit build ../agy-gemini
 ```
-This executes `uv run python -m kit check <dir>` to verify syntax, bundle limits, entrypoint scripts, and protocol compliance.
 
-### B. Building the Serve Container Image
-```bash
-cd ple-bench
-uv run python -m kit build sample_submissions/agy-gemini
-```
-Verifies that the `install` directive builds cleanly into an isolated bundle without exceeding disk quotas.
-
-### C. Verifying Artifacts
-```bash
-cd ple-bench
-uv run python -m kit artifacts ../starter-kit
-```
-Inspects the 29 task artifact folders in `artifacts/`, verifying manifest hashes, required deliverable files, and grading readiness.
-
----
-
-## 5. Development Tasks & Evaluation Modes
-
-The public dev set consists of 29 tasks defined in `ple-bench/eval/dev_set.yaml`:
-- **14 `checks` tasks:** Graded deterministically via unit test suites, numeric tolerance checks, or deterministic file diffs inside an isolated verifier container.
-- **12 `rubric` tasks:** Graded using an LLM verifier (Claude Opus 5.5 judge) scoring domain deliverables against multi-point professional rubrics.
-- **3 `checks-judge` tasks:** Hybrid grading combining deterministic checks with rubric evaluation.
-
-Each task runs with a 360-minute (6-hour) maximum execution limit and requires 6 CPUs / 16.25 GB RAM.
-
----
-
-## 6. Guidelines for Agent Contributions
-
-- Keep all harness code modular and transparent.
-- When creating a new harness, always implement clean signal handling (handling `SIGINT`/`SIGTERM` gracefully within the 120-second Harbor stop window).
-- Preserve tool hygiene: ensure `read_file` returns raw bytes or image blocks for drawings/diagrams (`.png`, `.pdf`, `.dwg`), and `shell` returns standard exit codes and truncated logs.
-- Never hard-code task solutions or fingerprint task IDs.
+A passing check is packaging evidence. The contest number is the reward in the manifest that command does not write.
