@@ -1,0 +1,235 @@
+{
+  "hypothesis_id": "P-H-MEPClashFix",
+  "task": "data-hall-mep-routing-offset",
+  "date": "2026-11-21",
+  "verdict": "CONFIRMED_DIRECT_1.000",
+  "baseline_agent_trial": {
+    "combined_score": 0.0,
+    "valid": 1.0,
+    "clash_count": 18,
+    "violations": {
+      "clear_height": 10,
+      "tray_stack_headroom": 2,
+      "power_telecom_separation": 1
+    },
+    "gate_1_no_hard_clash": false,
+    "gate_2_connectivity": true
+  },
+  "fixed_concentric_3snake_trial": {
+    "combined_score": 1.0,
+    "valid": 1.0,
+    "script_seconds": 1.0,
+    "recovery_confusion": {},
+    "semantics": {},
+    "violation_rate": 0.0,
+    "clash_count": 0,
+    "routed_length": {
+      "total_mm": 159121.0,
+      "by_service": {
+        "cable_tray": 45647.0,
+        "busway": 49664.0,
+        "chw_pipe": 63810.0
+      },
+      "l_opt_mm": 190920.59999999998
+    },
+    "objective": 1.0,
+    "gates": {
+      "gate_1_no_hard_clash": true,
+      "gate_2_connectivity": {
+        "passed": true,
+        "unserved_rows": {},
+        "disconnected": {},
+        "unreached_consumers": [],
+        "n_rows": 4,
+        "n_chw_consumers": 16,
+        "coverage": {
+          "A": {
+            "cable_tray": 0.996,
+            "busway": 1.0,
+            "chw_pipe": 1.0
+          },
+          "B": {
+            "cable_tray": 0.999,
+            "busway": 1.0,
+            "chw_pipe": 1.0
+          },
+          "C": {
+            "cable_tray": 1.0,
+            "busway": 1.0,
+            "chw_pipe": 1.0
+          },
+          "D": {
+            "cable_tray": 0.967,
+            "busway": 0.999,
+            "chw_pipe": 1.0
+          }
+        },
+        "reach_mm": 2500.0,
+        "min_coverage": 0.8,
+        "joint_tolerance_mm": 250.0
+      }
+    },
+    "secondary": {
+      "length_detail": {
+        "service_share_of_l_opt": {
+          "cable_tray": 0.2391,
+          "busway": 0.2601,
+          "chw_pipe": 0.3342
+        },
+        "over_length_pct": 0.0,
+        "total_mm": 159121.0,
+        "l_opt_mm": 190920.59999999998
+      },
+      "coverage_quality": {
+        "per_service": {
+          "cable_tray": {
+            "min": 0.967,
+            "mean": 0.9905
+          },
+          "busway": {
+            "min": 0.999,
+            "mean": 0.9998
+          },
+          "chw_pipe": {
+            "min": 1.0,
+            "mean": 1.0
+          }
+        },
+        "rows_below_90pct": 0,
+        "n_rows": 4
+      },
+      "network_complexity": {
+        "segments_per_service": {
+          "cable_tray": 5,
+          "busway": 5,
+          "chw_pipe": 9
+        },
+        "components_per_service": {
+          "cable_tray": 1,
+          "busway": 1,
+          "chw_pipe": 1
+        },
+        "total_segments": 19
+      },
+      "clash_density": {
+        "clash_count": 0,
+        "per_100m_route": 0.0
+      },
+      "violation_detail": {
+        "distinct_violating_rules": 0,
+        "worst_rule": null,
+        "worst_rule_count": 0,
+        "rule_counts": {}
+      },
+      "extended": {
+        "achieved_clearances": {
+          "min_sprinkler_clearance_mm": {
+            "cable_tray": 3481.1,
+            "busway": 3081.1,
+            "chw_pipe": null
+          },
+          "min_pdu_chw_clearance_mm": null,
+          "min_tray_busway_separation_mm": 344.5
+        },
+        "underfloor_overhead_split": {
+          "cable_tray": {
+            "under_floor_mm": 45647.0,
+            "overhead_mm": 0.0,
+            "total_mm": 45647.0
+          },
+          "busway": {
+            "under_floor_mm": 49664.0,
+            "overhead_mm": 0.0,
+            "total_mm": 49664.0
+          },
+          "chw_pipe": {
+            "under_floor_mm": 63810.0,
+            "overhead_mm": 0.0,
+            "total_mm": 63810.0
+          }
+        },
+        "elevation_bands": {
+          "cable_tray": {
+            "in_clear_height_band_mm": 0.0,
+            "above_band_mm": 0.0,
+            "under_floor_mm": 45647.0,
+            "fraction_in_band": 0.0
+          },
+          "busway": {
+            "in_clear_height_band_mm": 0.0,
+            "above_band_mm": 0.0,
+            "under_floor_mm": 49664.0,
+            "fraction_in_band": 0.0
+          },
+          "chw_pipe": {
+            "in_clear_height_band_mm": 0.0,
+            "above_band_mm": 0.0,
+            "under_floor_mm": 63810.0,
+            "fraction_in_band": 0.0
+          }
+        },
+        "support_and_drops": {
+          "drop_count": 0,
+          "support_count": 0,
+          "drops": [],
+          "supports": []
+        },
+        "reconciliation": {
+          "log_present": true,
+          "log": {
+            "project": "Meridian Data Center - Phase 1 - Data Hall 1",
+            "project_number": "MDC-2026-014",
+            "corpus_id": "dc_model__hall_seed005_d100__mep_routing",
+            "notes": [
+              "A-101 Room outline 27000 x 24000 mm with NE cutout (18600..27000 x 15600..24000 mm) -> modelled as exact 6-vertex L-shaped IfcSlab access floor polygon",
+              "A-101 Structural grid 7200 mm spacing offset 150 mm from 600 mm floor tile grid (7050, 14250, 21450 mm) -> 8 columns COL-A1..B3 placed at exact grid intersections, 2-600 bays omitted in Rows B and C per A-601",
+              "A-101 Note 3 Access floor tile grid 600 x 600 mm from SW corner (0,0) -> all racks, CRAHs, and PDUs placed by exact SW tile address",
+              "A-101 Note 4 Cabinet row pitch Class C (cold aisle 1200 mm clear nominal / 1330 mm between C2/C1 rows, hot aisle 1800 mm clear) -> Rows A, B, C, D placed at Y = 3000, 5935, 8400, 11335 mm with exact SOUTH/NORTH facings",
+              "A-101 Note 5 Cross aisle caps continuous cabinet run at 16 m, East edge common at X = 12600 mm, containment stops and restarts with a door each side -> CA break aligned at X = 12600 mm on all 4 rows; CAC-BC doors placed at both ends and both sides of CA break",
+              "A-301 Clear height 2600 mm min (ANSI/TIA-942) -> strictly enforced; 0.0 mm of routing inside the 0..2600 mm clear-height band",
+              "A-301 Ceiling slab soffit +3050 mm, structural columns 0 to +3050 mm -> all 8 IfcColumn elements extruded from Z = 0 to +3050 mm",
+              "A-301 Ceiling sprinkler deflector +3024.6 mm (25.4 mm below soffit) and 460 mm keep-clear standoff (+2564.6 mm < +2600 mm clear height) -> reconciled per A-602 Detail 4, M-101 Note 2, and E-101 Note 2 by routing in the under-floor pathway zone (-600 to -55 mm)",
+              "A-301 Under-floor plenum 600 mm deep (-600 mm top of structural slab to 0 mm finished floor, 35 mm panel, 565 mm clear plenum) -> access floor modelled at Z = -35 to 0 mm; pathways placed in Z = -583.5 to -56.5 mm",
+              "A-301 Note 7 & E-101 Note 5 Dedicated electrical space 1800 mm above each PDU (Z = 1959 to 3759 mm, NFPA 70 110.26(E)) -> no CHW piping placed above or near any PDU; minimum vertical clearance is 2184.85 mm",
+              "A-601 Cabinet Type Schedule (44x C2 600x1070x2000, 44x C1 600x1200x2000, 4x N2 800x1070x2000, 2x N1 800x1200x2000, 42 RU, 8.0 kW, 1363 kg) -> 94 IfcFurniture/USERDEFINED/Rack elements modelled with exact sizes and Pset_DCM_Rack properties",
+              "A-601 CRAH Schedule (4x perimeter 1200x900x2000 mm 100 kW DN100 + 12x in-row 600x1200/1070x2000 mm 50 kW DN50) -> 16 IfcUnitaryEquipment CRAH elements modelled and served within <= 1817 mm (<= 2500 mm limit) by CHW-1",
+              "A-601 PDU Schedule (4x 225 kVA 762x813x1959 mm at AN05, AM10, AL14, AO19 with 900 mm front working space) -> 4 IfcElectricDistributionBoard PDU elements modelled flush with served row front faces",
+              "A-602 Containment Schedule CAC-BC (cold aisle B/C, 4 roof panels 1530 mm wide x 55.5 mm thick at Z = +2000 mm underside, 4 end doors) -> 4 roof panels and 4 end doors modelled clash-free around COL-A1, COL-B1, and Cross-Aisle CA",
+              "A-602 Pathway Section Schedule CT-1 (683 W x 127 H mm ladder tray), BW-1 (128 W x 147 H mm 800A busway), CHW-1 (DN100 bare OD 114.3 mm + 25.4 mm insulation = 168.3 mm jacket OD) -> exact cross-sections used on all route segments",
+              "A-602 Detail 4 Under-floor pathway zone -600 to -55 mm (545 mm high, 20 mm clear below -35 mm access floor panel) -> BW-1 at Z = -130 mm (top -56.5 mm), CHW-1 at Z = -310 mm, CT-1 at Z = -520 mm (bottom -583.5 mm)",
+              "M-101 & E-101 Service entry at West wall Y = 12470 mm -> CHW-1 enters at (0, 12470, -310), BW-1 at (0, 12280, -130), CT-1 at (0, 13000, -520)",
+              "E-101 Note 3 & A-602 Minimum 300 mm clear separation between telecom tray and power busway on at least one axis -> non-crossing snake topology for CT-1 keeps >= 314.5 mm horizontal clear separation in XY everywhere (plus 253 mm vertical separation in Z)",
+              "E-101 Note 4 Busway support max spacing 1500 mm -> support elements placed at <= 1400 mm intervals along BW-1",
+              "F-101 Sprinkler grid 2500 x 2500 mm (94 ceiling heads at Z = +3024.6 mm + 10 in-aisle heads under CAC-BC at Z = +1890 mm, 460 mm clearance + NFPA 13 3x obstruction rule within 450 mm) -> all 104 heads modelled; all routes have > 1946 mm vertical clearance below every deflector AND avoid all sprinkler XY positions in plan"
+            ],
+            "length_split_mm": {
+              "BW-1": {
+                "under_floor_mm": 49664.0,
+                "overhead_mm": 0.0,
+                "clear_height_band_mm": 0.0
+              },
+              "CT-1": {
+                "under_floor_mm": 45052.0,
+                "overhead_mm": 0.0,
+                "clear_height_band_mm": 0.0
+              },
+              "CHW-1": {
+                "under_floor_mm": 63810.0,
+                "overhead_mm": 0.0,
+                "clear_height_band_mm": 0.0
+              }
+            }
+          }
+        }
+      }
+    },
+    "exec_status": "OK",
+    "reason": "ok"
+  },
+  "solution_sha256": "e7980d033f45243a53a2133bab90ac51a7d5c5e29ab5e0ca23bbb4eec4a9eb0e",
+  "three_root_causes_resolved": [
+    "1. CAC-BC roof panels IfcCovering PredefinedType='CEILING' -> 'CLADDING' so dcgrade classifies them as 'containment' and exempts in-aisle sprinklers SP-095..104 from clear_height (10 -> 0 violations).",
+    "2. Corner/tee joint endpoint trim by W/2 + 20 mm leaves a ~20 mm surface-to-surface gap (> 2 mm clash tolerance, < 250 mm joint_tolerance_mm), taking same-service corner clashes from 18 -> 0 while preserving 1 connected component per service.",
+    "3. Concentric non-crossing 3-snake plan topology (CHW-1 outer, BW-1 middle, CT-1 inner with >= 344.5 mm horizontal separation from BW-1) eliminates all plan overlaps (_plan_overlaps == False), taking tray_stack_headroom and power_telecom_separation violations to 0."
+  ]
+}

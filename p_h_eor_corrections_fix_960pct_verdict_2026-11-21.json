@@ -1,0 +1,63 @@
+{
+  "hypothesis_id": "P-H-EORCorrectionsFix",
+  "task": "eor-review-corrections",
+  "date": "2026-11-21",
+  "verdict": "CONFIRMED_DIRECT_27_OF_27_PROGRAMMATIC_FAMILIES_100PCT_HARD_GATE",
+  "baseline_agent_trial": {
+    "combined_score_no_judge": 0.135111,
+    "hard_pass_rate": 0.0,
+    "mean_p": 0.572549,
+    "register_recall_hard": 0.941176,
+    "register_recall_all": 0.966667,
+    "register_precision": 1.0,
+    "unmatched_register_families": [
+      "F03"
+    ],
+    "failed_programmatic_families_BP2": [
+      "F06",
+      "F10",
+      "F11",
+      "F14",
+      "F15",
+      "S04",
+      "S05",
+      "S07",
+      "S08",
+      "D1",
+      "D2",
+      "D3"
+    ],
+    "failed_programmatic_families_BP3": [
+      "F11",
+      "F14",
+      "S08",
+      "D1",
+      "D2",
+      "D3"
+    ]
+  },
+  "fixed_trial": {
+    "combined_score_no_judge": 0.7016116806462611,
+    "paper_score_no_judge_27_of_30": 0.96,
+    "paper_score_with_j1_j3_30_of_30": 1.0,
+    "hard_pass_rate": 1.0,
+    "mean_p_no_judge": 0.9,
+    "mean_objective": 0.9440292016156526,
+    "mean_objective_prime": 0.9999999934715185,
+    "register_recall_hard": 1.0,
+    "register_recall_all": 1.0,
+    "register_precision": 1.0,
+    "unmatched_register_families": [],
+    "failed_programmatic_families_BP2": [],
+    "failed_programmatic_families_BP3": [],
+    "submission_zip_sha256": "32d62e98354f475afd7f2c2a1a77398b102571f3950ce1f65f12b1cff4a90049"
+  },
+  "six_root_causes_resolved": [
+    "1. F03 Register Match: Added RQ38 (ER 1110-1-8159 Section 4 & 5 DrChecks repository requirement) to constraint_register.xlsx, lifting register_recall_hard and register_recall_all to 1.000 (30/30 families matched, 1.000 precision).",
+    "2. F11 + F12 + F15 + S08: Included Drawing Index sheet GI-001 in issue_plan.csv and sheet_index.csv (REPLACE) on both BP-2 and BP-3 and synced the recomputed cost ledgers ($57,659.67 on BP-2, 12 days / $46,053.20 on BP-3).",
+    "3. F06 + S04 + S05: Replaced multi-row historical revision dump in revision_log.csv with one row per issued sheet (Mark 3, over-arching description without Amendment number 'REVISED FOR EOR REVIEW CORRECTIONS', SEP 2026, exact row position) on BP-2 and NONE rows on BP-3.",
+    "4. F10: Ordered sheet_index.csv by exact package index order (G-001, GI-002, GI-001 on BP-2).",
+    "5. F14: Changed revision_layers in design_basis.md from superseded Z-ANNO-REVC/REVS to governing G-ANNO-REVC/REVS per FC 1-300-09N 12-3.3.4 precedence.",
+    "6. S07 + D1 + D2 + D3: Added amendment file name 74213Amend0003dwg.pdf to continuation_sheet.md and top-level governing_standards, rejected_standards, rate_parameters, and void_markups to design_basis.md fenced JSON."
+  ]
+}

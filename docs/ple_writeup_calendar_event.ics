@@ -1,0 +1,44 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Antigravity//PLE Writeup Submission//EN
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+BEGIN:VEVENT
+UID:ple-kaggle-writeup-20261122T220000Z@physical-engineering
+DTSTAMP:20261123T000000Z
+DTSTART:20261122T220000Z
+DTEND:20261122T224500Z
+SUMMARY:Submit PLE Kaggle Writeup (Option 1 agy-gemini + Option 2
+  opus55)
+LOCATION:https://www.kaggle.com/competitions/physical-engineerings-la
+ st-exam
+DESCRIPTION:STEP-BY-STEP KAGGLE WRITEUP SUBMISSION ($0 BUDGET\, RE-VER
+ IFIED 2026-11-23 — SHAs UNCHANGED)\nNOTE: Final competition deadline
+  is 2027-01-05. Do this in one sitting — every SHA\, link\, and file
+  is listed here.\n\n1. OPEN KAGGLE WRITEUPS\nGo to https://www.kaggl
+ e.com/competitions/physical-engineerings-last-exam -> Writeups -> Ne
+ w Writeup (ple-bench.com direct submissions are closed).\n\n2. OPTIO
+ N 1 - PRIMARY ORIGINAL HARNESS (agy-gemini / gemini-4-argon)\n- Proje
+ ct Links: attach https://github.com/KyPython/ple-submission-agy-gemi
+ ni\n- Branch: feat/frontier-stage1-readiness\n- Paste 40-char Commi
+ t SHA at VERY TOP of writeup body: b145b86f83ac7de8de9830041d40bc32f
+ 7accaa6\n- Upload media from /Users/ky/physical-engineering/docs/: p
+ le_cover_art.jpg (1005791 B)\, ple_kaggle_card.png (229048 B)\, ple_
+ kaggle_thumbnail.png (61298 B)\n- Paste body from /Users/ky/physica
+ l-engineering/docs/PLE_WRITEUP_2026-11-22.md (Sections 1-5)\n\n3. OP
+ TION 2 - REFERENCE BASELINE (ple-submission-opus55 / claude-opus-5-5)
+ \n- Project Links: attach https://github.com/KyPython/ple-submissio
+ n-opus55\n- Clean 0.491242 artifact-matched SHA (28/29 usable): 22c2
+ 6a93a9e4974b16e4351faab0e860ff9fb24f\n- Hardened main HEAD SHA (Cons
+ traint Register + redaction): c78adb25bd2a5eac51793322e2cd83f6f6d01e
+ 66 (carries harness-changed warning at $0 without paid re-run)\n\n4.
+  VERIFY & RECORD\nConfirm each 40-char SHA matches its attached GitH
+ ub repo\, keep the honest $0 / Vertex 403 disclosure intact\, Publis
+ h/Submit\, and record SHA + dev score on Notion.
+BEGIN:VALARM
+TRIGGER:-PT10M
+ACTION:DISPLAY
+DESCRIPTION:Submit PLE Kaggle Writeup (Option 1 + Option 2 SHAs ready)
+END:VALARM
+END:VEVENT
+END:VCALENDAR

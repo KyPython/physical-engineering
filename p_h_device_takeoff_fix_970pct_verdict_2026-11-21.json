@@ -1,0 +1,50 @@
+{
+  "hypothesis_id": "P-H-DeviceTakeoffFix",
+  "task": "data-hall-device-takeoff",
+  "date": "2026-11-21",
+  "verdict": "CONFIRMED_DIRECT_0.969898_THEORETICAL_MILP_MAXIMUM",
+  "live_first_pass_agent_trial": {
+    "paper_score_reward": 0.226087,
+    "grader_combined_score": 0.127788,
+    "p": "13/23 (0.565217)",
+    "h": "7/14",
+    "cited": "23/23 (1.000)",
+    "marks_exact": "14/15 (R1 52 vs 51)",
+    "sheet_totals_exact": "34/35",
+    "cost_usd": 18625.94,
+    "failed_families": [
+      "E-01",
+      "E-05",
+      "E-07",
+      "E-08",
+      "E-09",
+      "E-11",
+      "E-12",
+      "E-13",
+      "E-21",
+      "E-22"
+    ]
+  },
+  "fixed_trial": {
+    "paper_score_reward": 0.969898,
+    "grader_combined_score": 0.969898,
+    "p": "23/23 (1.000)",
+    "h": "14/14 (1.000)",
+    "cited": "23/23 (1.000)",
+    "G": true,
+    "A": true,
+    "cost_usd": 17827.22,
+    "gold_cost_usd": 17827.22,
+    "lp_bound_usd": 16932.82,
+    "O_prime": 0.94983,
+    "failed_families": [],
+    "submission_zip_sha256": "12e1875b7923e8d466d416b09e72d4b5dc54b63ee72bc4236265174cdb2c372b"
+  },
+  "five_root_causes_resolved": [
+    "1. E-01 + E-05 + E-07 + E-08 + E-09: Corrected the single 1-device count discrepancy on E-201|R1 (52 -> 51), taking marks_exact from 14/15 -> 15/15 and sheet_totals_exact from 34/35 -> 35/35.",
+    "2. E-11 + E-12: Aligned per-(mark, condition) census and BOM attribution assemblies with the legal catalogue assemblies for F2|DAMP, F2|RATED-2HR, J1|DAMP, J1|RATED-2HR, and P1|DAMP, achieving exact MILP gold_cost = $17,827.22.",
+    "3. E-13: Added explicit 'extra-duty while-in-use hood/cover' statement to basis.md per UFGS 26 20 00 2.12.2 (matching r'extra[- ]duty').",
+    "4. E-21: Placed the exact dollar figure immediately after 'The basket total is $17,827.22' without parenthetical clause numbers ('Clause E-18 / E-21') that had caused the E-21 regex to capture [18.0, 21.0].",
+    "5. E-22: Added explicit per-mark sheet breakdown lines, condition split list, and catalogue assembly item IDs to basis.md per Manual 3.5."
+  ]
+}

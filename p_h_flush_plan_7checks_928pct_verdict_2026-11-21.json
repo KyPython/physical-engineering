@@ -1,0 +1,96 @@
+{
+  "hypothesis_id": "P-H-FlushPlan7Checks",
+  "task": "cooling-water-flush-plan",
+  "date": "2026-11-21",
+  "verdict": "CONFIRMED_DIRECT_0.928406",
+  "baseline_agent_trial": {
+    "paper_score_reward": 0.266667,
+    "grader_combined_score": 0.050521,
+    "hard_pass_rate": 0.0,
+    "register_forfeit": [
+      "R06"
+    ],
+    "failed_families_per_circuit": {
+      "C3": [
+        "H03",
+        "H06",
+        "H08",
+        "H17",
+        "S21",
+        "S23",
+        "S24"
+      ],
+      "C4": [
+        "H03",
+        "H06",
+        "H08",
+        "H12",
+        "H17",
+        "S21",
+        "S23",
+        "S24"
+      ],
+      "C5": [
+        "H03",
+        "H06",
+        "H08",
+        "H12",
+        "H17",
+        "S21",
+        "S23",
+        "S24"
+      ],
+      "C6": [
+        "H03",
+        "H08",
+        "H12",
+        "H17",
+        "S21",
+        "S23",
+        "S24"
+      ],
+      "C7": [
+        "H03",
+        "H06",
+        "H08",
+        "H12",
+        "H17",
+        "S21",
+        "S23",
+        "S24"
+      ],
+      "C8": [
+        "H12",
+        "S21",
+        "S23",
+        "S24"
+      ]
+    }
+  },
+  "fixed_trial": {
+    "paper_score_reward": 0.928406,
+    "grader_combined_score": 0.892609,
+    "hard_pass_rate": 1.0,
+    "mean_O": 0.880676,
+    "mean_O_prime": 0.815851,
+    "register_forfeit": [],
+    "passed_families_per_circuit": {
+      "C3": "24/24 (G=1, A=1, failed=[])",
+      "C4": "24/24 (G=1, A=1, failed=[])",
+      "C5": "24/24 (G=1, A=1, failed=[])",
+      "C6": "24/24 (G=1, A=1, failed=[])",
+      "C7": "24/24 (G=1, A=1, failed=[])",
+      "C8": "24/24 (G=1, A=1, failed=[])"
+    },
+    "submission_zip_sha256": "09cdf6a50edb0eb30e0ef67fe6e48928fae8b05bb6cce05863298776a0f075d3"
+  },
+  "seven_root_causes_resolved": [
+    "1. H03 + H17 + S21 (head): Lowered FINAL_FILL turnover flow_gpm (450 gpm on C2/C3, 240 gpm on C4..C7) and declared un-bypassed required_head_ft so reinstated heat exchangers/cold plates stay below M-602 max_dp_ft and skid curves.",
+    "2. H06: Set CHEM_CLEAN pH target window to [7.5, 8.5] (inside procedure band 7.5-8.5 and <= 8.5 sensitive-metal cap).",
+    "3. H08: Documented pre-staging of SV-2/SF-1 softened turnover makeup in portable holding tanks ahead of final fill so no day exceeds SF-1's 5,621 gal daily capacity.",
+    "4. H12: Routed DRAIN_RINSE on copper-pipe (C4..C7) and galvanized (C8) circuits to HAUL so first-displacement spent cleaner Cu (3.4/1.6 mg/L) and Zn (5.5 mg/L) never enter MH-14 sewer (1.0 mg/L local limit).",
+    "5. S22 / R06: Added UFC 3-230-13 cl. 6-2.2.2 ((Cl + SO4) > 800 ppm excludes nitrite) to constraint_register.csv, eliminating register forfeit ['R06'].",
+    "6. S23: Added explicit 29 CFR 1910.1200(e) written HazCom program and 29 CFR 1910.1200(h) crew training bullets to MOP.md Section 7.",
+    "7. S21 (cost) + S24: Synced recomputed programme_cost_usd in resources.json and binding governing constraint margins in MOP.md."
+  ]
+}
